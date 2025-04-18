@@ -12,36 +12,45 @@ struct ListNode {
 
 class Solution {
 public:
-    bool hasCycle(ListNode *head) {
-        if (!head || !head->next) {
-            return false;
-        }
-        ListNode* slow = head;
-        ListNode* fast = head;
+    ListNode* reverseList(ListNode* head) {
+        ListNode* curr = head;
+        ListNode* prev = nullptr;
+        ListNode* nextNode = nullptr;
 
-        while (fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
-            if (slow == fast) {
-                return true;
-            }
+        while (curr != nullptr) {
+            nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
         }
-        return false;
+        return prev;  // New head of the reversed list
     }
 };
 
-// Optional: main function to test the above code
+// Helper function to print the linked list
+void printList(ListNode* head) {
+    while (head != nullptr) {
+        cout << head->val << " -> ";
+        head = head->next;
+    }
+    cout << "NULL" << endl;
+}
+
 int main() {
-    // Creating a test list: 1 -> 2 -> 3 -> 4 -> back to 2 (cycle)
+    // Creating a test list: 1 -> 2 -> 3 -> 4 -> NULL
     ListNode* head = new ListNode(1);
     head->next = new ListNode(2);
     head->next->next = new ListNode(3);
     head->next->next->next = new ListNode(4);
-    head->next->next->next->next = head->next; // cycle
+
+    cout << "Original List: ";
+    printList(head);
 
     Solution sol;
-    bool result = sol.hasCycle(head);
-    cout << (result ? "Cycle detected" : "No cycle") << endl;
+    ListNode* reversedHead = sol.reverseList(head);
+
+    cout << "Reversed List: ";
+    printList(reversedHead);
 
     return 0;
 }
