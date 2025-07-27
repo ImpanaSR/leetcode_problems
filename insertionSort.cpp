@@ -21,6 +21,6 @@ void printArray(int arr[], int n){
 int main(){
     int n = 5;
     int arr[] = {4, 1, 5, 2, 3};
-    selectionSort(arr, n);
+    insertionSort(arr, n);
     printArray(arr, n);
 }
