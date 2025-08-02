@@ -12,6 +12,11 @@ int gcd(int a, int b){
     if(a==0) return b;
     return a;
 }
+
+int lcm(int a, int b){
+    int gcd2 = gcd(a, b);
+    return (a*b)/gcd2;
+}
 int main(){
     cout<<gcd(20, 28)<<endl;
     return 0;
